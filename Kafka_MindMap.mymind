@@ -1,0 +1,382 @@
+{
+	"root": {
+		"id": "mnvxoicj",
+		"text": "Kafka",
+		"layout": "map",
+		"children": [
+			{
+				"id": "hzftslez",
+				"text": "Consumer Group",
+				"side": "right",
+				"color": "#fa3",
+				"children": [
+					{
+						"id": "tkwydtnp",
+						"text": "Consumers are part of a group"
+					},
+					{
+						"id": "vbyzhqji",
+						"text": "Multiple consumers in the same group receive msgs from different partitions"
+					},
+					{
+						"id": "kzlolqrv",
+						"text": "Consumers in a group do not share the same partition"
+					},
+					{
+						"id": "zelfbbnw",
+						"text": "If #partitions == #consumers in a group then each consumer is assigned 1 partition"
+					},
+					{
+						"id": "vpjnqwlo",
+						"text": "If #partitions &gt; #consumers in a group then few consumers are assigned more than 1 partition"
+					},
+					{
+						"id": "hwchybgl",
+						"text": "If #partitions &lt; #consumers in a group then few consumers are idle"
+					}
+				]
+			},
+			{
+				"id": "idirjqec",
+				"text": "Consumer",
+				"side": "right",
+				"color": "#d3d",
+				"children": [
+					{
+						"id": "ofdnshmr",
+						"text": "Parallel Consumption",
+						"children": [
+							{
+								"id": "xbsvrckr",
+								"text": "1 Thread per Consumer"
+							}
+						]
+					},
+					{
+						"id": "cadvskph",
+						"text": "Partition Assignment",
+						"children": [
+							{
+								"id": "ljbdhmsb",
+								"text": "Auto",
+								"children": [
+									{
+										"id": "zhemvcgw",
+										"text": "Consumer Group Leader",
+										"children": [
+											{
+												"id": "uopcnhuo",
+												"text": "1st Consumer&nbsp;"
+											},
+											{
+												"id": "htfjmplm",
+												"text": "Partition Assigner",
+												"children": [
+													{
+														"id": "eeqgidua",
+														"text": "Range",
+														"children": [
+															{
+																"id": "nccwdaqj",
+																"text": "Default"
+															}
+														]
+													},
+													{
+														"id": "bafwvahd",
+														"text": "Round Robin"
+													}
+												]
+											}
+										]
+									}
+								]
+							},
+							{
+								"id": "tybwewyh",
+								"text": "Manual",
+								"children": [
+									{
+										"id": "qppkkvmb",
+										"text": "assign(Collection&lt;TopicPartition&gt; partitions)"
+									}
+								]
+							},
+							{
+								"id": "jidvhdmp",
+								"text": "Rebalancing",
+								"children": [
+									{
+										"id": "suaxwluu",
+										"text": "Rebalance Listeners",
+										"children": [
+											{
+												"id": "lsdhbsqh",
+												"text": "ConsumerRebalanceListener",
+												"children": [
+													{
+														"id": "qolsabcq",
+														"text": "onPartitionsRevoked"
+													},
+													{
+														"id": "flvwbhtm",
+														"text": "onPartitionsAssigned"
+													}
+												]
+											}
+										]
+									},
+									{
+										"id": "tlsazrsq",
+										"text": "consumers don't received messages during rebalancing"
+									}
+								]
+							}
+						]
+					},
+					{
+						"id": "ebbmskkz",
+						"text": "Offset Management",
+						"children": [
+							{
+								"id": "ueojabxm",
+								"text": "<div style=\"text-align: left;\">Managed in __consumer_offsets topic</div>",
+								"children": [
+									{
+										"id": "bscaoumo",
+										"text": "Is a compaction topic - stores latest value for a key"
+									},
+									{
+										"id": "xcvpfaha",
+										"text": "Key is (consumer group, topic, partition number)"
+									}
+								]
+							},
+							{
+								"id": "btbatzma",
+								"text": "poll() commits the last offset returned by the previous poll",
+								"color": "#e33"
+							},
+							{
+								"id": "gcuncuea",
+								"text": "Might receive duplicates"
+							},
+							{
+								"id": "wxovchsc",
+								"text": "Might miss messages"
+							},
+							{
+								"id": "grofieqh",
+								"text": "Auto commit",
+								"children": [
+									{
+										"id": "lidirktf",
+										"text": "Default every 5 seconds"
+									}
+								]
+							},
+							{
+								"id": "mvysgyjr",
+								"text": "Manual Commit",
+								"children": [
+									{
+										"id": "hpyfvybs",
+										"text": "commitSync()",
+										"children": [
+											{
+												"id": "dtrnixao",
+												"text": "after processing all records received in poll()"
+											},
+											{
+												"id": "kwalfjgm",
+												"text": "Auto retry until succeed or failure"
+											}
+										]
+									},
+									{
+										"id": "rqrqtydt",
+										"text": "commitAsync()",
+										"children": [
+											{
+												"id": "sxeuoesh",
+												"text": "commit in a different thread"
+											},
+											{
+												"id": "vfaylulk",
+												"text": "does not Auto retry"
+											}
+										]
+									},
+									{
+										"id": "nkzeypoe",
+										"text": "commitSync() and commitAsync() could be combined as an option"
+									},
+									{
+										"id": "caummphp",
+										"text": "commitSync, commitAsync accept Map&lt;TopicPartition,OffsetAndMetadata&gt;&nbsp; to set/override offset"
+									}
+								]
+							}
+						]
+					},
+					{
+						"id": "xgwixsan",
+						"text": "Consumer Position",
+						"children": [
+							{
+								"id": "zsjzjeit",
+								"text": "seekToBeginning(Collection&lt;TopicPartition&gt;)"
+							},
+							{
+								"id": "iubptykn",
+								"text": "seekToEnd(Collection&lt;TopicPartition&gt;)"
+							},
+							{
+								"id": "poipiium",
+								"text": "seek(TopicPartition, long)"
+							},
+							{
+								"id": "qpubylex",
+								"text": "must call poll(0) before calling seek to join the consumer group"
+							}
+						]
+					},
+					{
+						"id": "eakswdbz",
+						"text": "Parallel Partition Processing",
+						"children": [
+							{
+								"id": "dhrzbcmv",
+								"text": "pause(Collection&lt;TopicPartition&gt; partitions)"
+							},
+							{
+								"id": "ujxnmdxb",
+								"text": "resume(Collection&lt;TopicPartition&gt; partitions)"
+							}
+						]
+					},
+					{
+						"id": "rpomiauv",
+						"text": "close",
+						"children": [
+							{
+								"id": "lklsgigo",
+								"text": "commit offsets if required"
+							},
+							{
+								"id": "glczyhxg",
+								"text": "notifies group co-ordinator",
+								"children": [
+									{
+										"id": "aqqxrljk",
+										"text": "triggers rebalancing"
+									}
+								]
+							}
+						]
+					},
+					{
+						"id": "uxsvtwlg",
+						"text": "DeSerializer",
+						"children": [
+							{
+								"id": "xozqeliw",
+								"text": "convert byte[] to Object"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "xlcsuqfw",
+				"text": "Cluster<br>(One or more Brokers)",
+				"side": "left",
+				"color": "#000",
+				"children": [
+					{
+						"id": "wcvejomy",
+						"text": "Partitions",
+						"children": [
+							{
+								"id": "mhsioswn",
+								"text": "Partitions are distributed across brokers"
+							},
+							{
+								"id": "jnvxuqfw",
+								"text": "Each partition has one broker that acts as a partition leader"
+							},
+							{
+								"id": "zatsgidy",
+								"text": "Partition leaders handle read and writes to partition"
+							},
+							{
+								"id": "chntcbfe",
+								"text": "Partitions can be leader or replica"
+							}
+						]
+					},
+					{
+						"id": "pedodspi",
+						"text": "Geo Replication",
+						"children": [
+							{
+								"id": "oibfqwbu",
+								"text": "Mirror Maker"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "xcikphql",
+				"text": "Producer",
+				"side": "left",
+				"color": "#3dd",
+				"children": [
+					{
+						"id": "rknxawdw",
+						"text": "Serializer",
+						"children": [
+							{
+								"id": "zkzygxjx",
+								"text": "convert Object to byte[]"
+							}
+						]
+					},
+					{
+						"id": "ybzwtppc",
+						"text": "Publish",
+						"children": [
+							{
+								"id": "citqvfjf",
+								"text": "Async"
+							},
+							{
+								"id": "axemcpet",
+								"text": "Flush"
+							}
+						]
+					},
+					{
+						"id": "tvjvkqgw",
+						"text": "Partition Selection",
+						"children": [
+							{
+								"id": "mhqmfzwh",
+								"text": "Record Key Hash(default)"
+							},
+							{
+								"id": "gkapspkm",
+								"text": "Custom partitioner implement&nbsp;<span style=\"background-color: transparent; color: inherit; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: inherit; white-space: pre-wrap; text-align: start;\">Partitioner</span>"
+							}
+						]
+					},
+					{
+						"id": "ezfjssyj",
+						"text": "Write to a leader&nbsp;"
+					}
+				]
+			}
+		]
+	}
+}
